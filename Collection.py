@@ -1,22 +1,18 @@
 __author__ = 'Ryan'
 
-from mmap import mmap, ACCESS_READ
-from xlrd import open_workbook
+
+from xlrd import open_workbook, cellname
 
 book = open_workbook('20020101-20130501.xls')
+sheet = book.sheet_by_index(0)
+print sheet.name
 
-print book.nsheets
+print sheet.nrows
+print sheet.ncols
 
-for sheet_index in range(book.nsheets):
-    print book.sheet_by_index(sheet_index)
-
-print book.sheet_names()
-
-for sheet_name in book.sheet_names():
-    print book.sheet_by_name(sheet_name)
-
-for sheet in book.sheets():
-    print sheet
+for row_index in range(sheet.nrows):
+    for col_index in range(sheet.ncols):
+        print sheet.cell(row_index, col_index).value
 
 
 
