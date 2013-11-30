@@ -1,30 +1,7 @@
 __author__ = 'Ryan'
 
 import MySQLdb as mdb
-import sys
 from xlrd import open_workbook, cellname
-
-#con = mdb.connect(host='localhost', user='root', passwd='7758258', db='lottery')
-#with con:
-#    cur = con.cursor()
-#    cur.execute("INSERT INTO test VALUES(1,2)")
-#    cur.close()
-#con.close()
-    #cur.execute("CREATE TABLE IF NOT EXISTS \
-    #            Writers(Id INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(25))")
-    #cur.execute("INSERT INTO Writers(Name) VALUES('abc')")
-    #cur.execute("INSERT INTO Writers(Name) VALUES('def')")
-
-
-#mydb = mdb.connect(host='localhost', user='root', passwd='7758258', db='lottery')
-#cur = mydb.cursor()
-#cur.execute("CREATE TABLE IF NOT EXISTS test6(ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(45))")
-#statement = "INSERT INTO test6(Name) VALUES('abc')"
-#cur.execute(statement)
-#cur.execute("SELECT VERSION()")
-#print "The version is: %s" % cur.fetchone()
-#cur.close()
-#mydb.close()
 
 #book = open_workbook('20020101-20130501.xls')
 #sheet = book.sheet_by_index(0)
