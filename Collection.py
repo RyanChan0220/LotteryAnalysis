@@ -3,16 +3,27 @@ __author__ = 'Ryan'
 import MySQLdb as mdb
 from xlrd import open_workbook, cellname
 
-#book = open_workbook('20020101-20130501.xls')
-#sheet = book.sheet_by_index(0)
-#print sheet.name
-#
-#print sheet.nrows
-#print sheet.ncols
-#
-#for row_index in range(sheet.nrows):
-#    for col_index in range(sheet.ncols):
-#        print sheet.cell(row_index, col_index).value
+
+def read_excel():
+    datas = []
+    book = open_workbook('20020101-20130501.xls')
+    sheet = book.sheet_by_index(0)
+    print sheet.name
+    print sheet.nrows
+    print sheet.ncols
+    for row_index in range(4022):
+        if(row_index >= 1):
+            print "ths row is: %d", row_index
+            award_string = sheet.cell(row_index, 3).value
+            try_string = sheet.cell(row_index, 11).value
+            award_num = int(award_string)
+            try_num = int(try_string)
+            datas.append((sheet.cell(row_index, 2).value, sheet.cell(row_index, 1).value,
+                          award_string,
+                          str(award_num / 100), str((award_num % 100) / 10), str(award_num % 10),
+                          try_string,
+                          str(try_num / 100), str((try_num % 100) / 10), str(try_num % 10)))
+    return datas
 
 
 def connect_to_db(db_name):
@@ -35,10 +46,12 @@ def write_many_to_db(conn, datas):
         conn.commit()
         cur.close()
 
+
 if __name__ == '__main__':
+    data = read_excel()
     connection = connect_to_db("3dlottery")
-    data = []
-    data.append(('20120101', '20120101', '123', '1', '2', '3', '321', '3', '2', '1'))
-    data.append(('20130101', '20120101', '123', '1', '2', '3', '321', '3', '2', '1'))
+    #data = []
+    #data.append(('20120101', '20120101', '123', '1', '2', '3', '321', '3', '2', '1'))
+    #data.append(('20130101', '20120101', '123', '1', '2', '3', '321', '3', '2', '1'))
     write_many_to_db(connection, data)
     close_db(connection)
